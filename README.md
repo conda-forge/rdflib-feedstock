@@ -14,14 +14,15 @@ Summary: RDFLib is a Python library for working with RDF, a simple yet powerful 
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/rdflib-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/rdflib-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/rdflib-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/rdflib-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/rdflib-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/rdflib-feedstock/branch/master)
+All platforms:
+[![noarch](https://img.shields.io/circleci/project/github/conda-forge/rdflib-feedstock/master.svg?label=noarch)](https://circleci.com/gh/conda-forge/rdflib-feedstock)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/rdflib/badges/version.svg)](https://anaconda.org/conda-forge/rdflib)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/rdflib/badges/downloads.svg)](https://anaconda.org/conda-forge/rdflib)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-rdflib-green.svg)](https://anaconda.org/conda-forge/rdflib) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdflib.svg)](https://anaconda.org/conda-forge/rdflib) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdflib.svg)](https://anaconda.org/conda-forge/rdflib) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdflib.svg)](https://anaconda.org/conda-forge/rdflib) |
 
 Installing rdflib
 =================
@@ -66,6 +67,7 @@ To manage the continuous integration and simplify feedstock maintenance
 Using the ``conda-forge.yml`` within this repository, it is possible to re-render all of
 this feedstock's supporting files (e.g. the CI configuration files) with ``conda smithy rerender``.
 
+For more information please check the [conda-forge documentation](https://conda-forge.org/docs/).
 
 Terminology
 ===========
