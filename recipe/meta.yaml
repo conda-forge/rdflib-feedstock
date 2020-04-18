@@ -1,6 +1,6 @@
 {% set name = "rdflib" %}
-{% set version = "4.2.2" %}
-{% set sha256 = "da1df14552555c5c7715d8ce71c08f404c988c58a1ecd38552d0da4fc261280d" %}
+{% set version = "5.0.0" %}
+{% set sha256 = "78149dd49d385efec3b3adfbd61c87afaf1281c30d3fcaf1b323b34f603fb155" %}
 
 package:
   name: {{ name|lower }}
@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1000
+  number: 0
   script: python setup.py install --single-version-externally-managed --record record.txt
   entry_points:
     - rdfpipe = rdflib.tools.rdfpipe:main
@@ -61,7 +61,7 @@ about:
   home: https://github.com/RDFLib/rdflib
   license: BSD 3-Clause
   license_file: LICENSE
-  summary: 'RDFLib is a Python library for working with RDF, a simple yet powerful language for representing information.'
+  summary: RDFLib is a Python library for working with RDF, a simple yet powerful language for representing information.
   dev_url: https://github.com/RDFLib/rdflib
   doc_url: https://rdflib.readthedocs.io
 
