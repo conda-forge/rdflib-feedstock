@@ -1,5 +1,5 @@
 {% set version = "6.2.0" %}
-{% set test_skips = "not (dawg_data_sparql or definednamespace_creator)" %}
+{% set test_skips = "not (dawg_data_sparql or definednamespace_creator or prepare_query)" %}
 {% set cov_fail_under = 72 %}
 
 package:
