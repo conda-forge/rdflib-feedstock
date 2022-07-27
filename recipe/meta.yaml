@@ -52,7 +52,6 @@ test:
   commands:
     - pip check
     # some missing file not in repo
-    - rm test/test_so_69984830.py || del test/test_so_69984830.py
     - pytest test -vv --cov rdflib --cov-report term-missing:skip-covered --no-cov-on-fail -k "{{ test_skips }}" --cov-fail-under {{ cov_fail_under }}
 
 about:
