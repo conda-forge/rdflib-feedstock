@@ -1,5 +1,5 @@
-{% set version = "6.1.1" %}
-{% set test_skips = "not (dawg_data_sparql or definednamespace_creator)" %}
+{% set version = "6.2.0" %}
+{% set test_skips = "not (dawg_data_sparql or definednamespace_creator or prepare_query)" %}
 {% set cov_fail_under = 72 %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
-  sha256: 8dbfa0af2990b98471dacbc936d6494c997ede92fd8ed693fb84ee700ef6f754
+  sha256: 62dc3c86d1712db0f55785baf8047f63731fa59b2682be03219cb89262065942
 
 build:
   number: 0
@@ -52,7 +52,6 @@ test:
   commands:
     - pip check
     # some missing file not in repo
-    - rm test/test_so_69984830.py || del test/test_so_69984830.py
     - pytest test -vv --cov rdflib --cov-report term-missing:skip-covered --no-cov-on-fail -k "{{ test_skips }}" --cov-fail-under {{ cov_fail_under }}
 
 about:
