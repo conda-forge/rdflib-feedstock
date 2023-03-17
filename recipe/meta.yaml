@@ -1,6 +1,6 @@
 {% set version = "6.3.0" %}
 {% set test_skips = "not (dawg_data_sparql or definednamespace_creator or prepare_query)" %}
-{% set cov_fail_under = 72 %}
+{% set cov_fail_under = 84 %}
 
 package:
   name: rdflib
