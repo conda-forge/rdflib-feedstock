@@ -7,12 +7,16 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
-  sha256: 6ea39896a4dbe10f933acf33aaab61d52f390d32e8618add4550d52e6a0d4428
+  - folder: dist
+    url: https://pypi.io/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
+    sha256: 6ea39896a4dbe10f933acf33aaab61d52f390d32e8618add4550d52e6a0d4428
+  - folder: src
+    url: https://github.com/RDFLib/rdflib/archive/refs/tags/{{ version }}.tar.gz
+    sha256: 2a7e0e94463eb0c779f4c2a23800223094a76d9cc42a6d723732364df5e0f92e
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: cd dist && {{ PYTHON }} -m pip install . --no-deps -vv
   noarch: python
   entry_points:
     - csv2rdf = rdflib.tools.csv2rdf:main
@@ -35,8 +39,8 @@ requirements:
 
 test:
   source_files:
-    - test
-    - pyproject.toml
+    - src/test
+    - src/pyproject.toml
   requires:
     - pip
     # berkeleydb -> bsddb3
@@ -52,12 +56,12 @@ test:
   commands:
     - pip check
     # some missing file not in repo
-    - pytest test -vv --cov rdflib --cov-report term-missing:skip-covered --no-cov-on-fail -k "{{ test_skips }}" --cov-fail-under {{ cov_fail_under }}
+    - cd src && pytest test -vv --cov rdflib --cov-report term-missing:skip-covered --no-cov-on-fail -k "{{ test_skips }}" --cov-fail-under {{ cov_fail_under }}
 
 about:
   home: https://github.com/RDFLib/rdflib
   license: BSD-3-Clause
-  license_file: LICENSE
+  license_file: dist/LICENSE
   summary: RDFLib is a Python library for working with RDF, a simple yet powerful language for representing information.
   dev_url: https://github.com/RDFLib/rdflib
   doc_url: https://rdflib.readthedocs.io
