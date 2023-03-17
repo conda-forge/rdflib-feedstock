@@ -1,18 +1,22 @@
-{% set version = "6.2.0" %}
+{% set version = "6.3.0" %}
 {% set test_skips = "not (dawg_data_sparql or definednamespace_creator or prepare_query)" %}
-{% set cov_fail_under = 72 %}
+{% set cov_fail_under = 84 %}
 
 package:
   name: rdflib
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
-  sha256: 62dc3c86d1712db0f55785baf8047f63731fa59b2682be03219cb89262065942
+  - folder: dist
+    url: https://pypi.io/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
+    sha256: 6ea39896a4dbe10f933acf33aaab61d52f390d32e8618add4550d52e6a0d4428
+  - folder: src
+    url: https://github.com/RDFLib/rdflib/archive/refs/tags/{{ version }}.tar.gz
+    sha256: 2a7e0e94463eb0c779f4c2a23800223094a76d9cc42a6d723732364df5e0f92e
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: cd dist && {{ PYTHON }} -m pip install . --no-deps -vv
   noarch: python
   entry_points:
     - csv2rdf = rdflib.tools.csv2rdf:main
@@ -24,19 +28,19 @@ build:
 requirements:
   host:
     - python >=3.7
+    - poetry-core >=1.4.0
     - pip
   run:
     - html5lib  # from extras
     - importlib-metadata
-    - isodate
-    - pyparsing
+    - isodate >=0.6.0,<0.7.0
+    - pyparsing >=2.1.0,<4
     - python >=3.7
-    - setuptools
 
 test:
   source_files:
-    - test
-    - setup.cfg
+    - src/test
+    - src/pyproject.toml
   requires:
     - pip
     # berkeleydb -> bsddb3
@@ -52,12 +56,12 @@ test:
   commands:
     - pip check
     # some missing file not in repo
-    - pytest test -vv --cov rdflib --cov-report term-missing:skip-covered --no-cov-on-fail -k "{{ test_skips }}" --cov-fail-under {{ cov_fail_under }}
+    - cd src && pytest test -vv --cov rdflib --cov-report term-missing:skip-covered --no-cov-on-fail -k "{{ test_skips }}" --cov-fail-under {{ cov_fail_under }}
 
 about:
   home: https://github.com/RDFLib/rdflib
   license: BSD-3-Clause
-  license_file: LICENSE
+  license_file: dist/LICENSE
   summary: RDFLib is a Python library for working with RDF, a simple yet powerful language for representing information.
   dev_url: https://github.com/RDFLib/rdflib
   doc_url: https://rdflib.readthedocs.io
