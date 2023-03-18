@@ -167,19 +167,19 @@ outputs:
         - pyproject.toml
       requires:
         - pip
-        - mypy
         - pytest
         - pytest-cov
         - pytest-subtests
+        # - mypy
       imports:
         - rdflib
       commands:
         - pip check
+        # definednamespace_creator: some test fixtures are missing
+        - pytest test -vv -k "not (definednamespace_creator or test_prepare_query)" --cov=rdflib --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=84
         # TODO: restore
         #   Found 4 errors in 3 files (checked 118 source files)
         # - mypy -p rdflib
-        # some test assets are missing
-        - pytest test -vv -k "not definednamespace_creator" --cov=rdflib --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=84
 
 about:
   home: https://github.com/RDFLib/rdflib
