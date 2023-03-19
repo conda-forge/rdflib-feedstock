@@ -192,6 +192,7 @@ about:
 extra:
   feedstock-name: rdflib
   recipe-maintainers:
+    - aucampia
     - satra
     - nicholascar
     - bollwyvl
