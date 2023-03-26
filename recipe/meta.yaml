@@ -1,5 +1,4 @@
 {% set version = "6.3.2" %}
-{% set test_skips = "not (dawg_data_sparql or definednamespace_creator or prepare_query)" %}
 
 package:
   name: rdflib-split
@@ -163,8 +162,9 @@ outputs:
         - python >=3.7
     test:
       source_files:
-        - test
+        - examples/
         - pyproject.toml
+        - test/
       requires:
         - pip
         - pytest
@@ -175,8 +175,7 @@ outputs:
         - rdflib
       commands:
         - pip check
-        # definednamespace_creator: some test fixtures are missing
-        - pytest test -vv -k "not (definednamespace_creator or test_prepare_query)" --cov=rdflib --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=84
+        - pytest test -vv -k "not test_prepare_query" --cov=rdflib --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=84
         # TODO: restore
         #   Found 4 errors in 3 files (checked 118 source files)
         # - mypy -p rdflib
