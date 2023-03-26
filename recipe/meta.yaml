@@ -1,5 +1,4 @@
-{% set version = "6.3.1" %}
-{% set test_skips = "not (dawg_data_sparql or definednamespace_creator or prepare_query)" %}
+{% set version = "6.3.2" %}
 
 package:
   name: rdflib-split
@@ -7,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
-  sha256: ced41883cdd387a53e73bf54d5db8b076e9675b59d8a601166220aa1e60970b6
+  sha256: 72af591ff704f4caacea7ecc0c5a9056b8553e0489dd4f35a9bc52dbd41522e0
 
 build:
   number: 0
@@ -163,8 +162,9 @@ outputs:
         - python >=3.7
     test:
       source_files:
-        - test
+        - examples/
         - pyproject.toml
+        - test/
       requires:
         - pip
         - pytest
@@ -175,8 +175,8 @@ outputs:
         - rdflib
       commands:
         - pip check
-        # definednamespace_creator: some test fixtures are missing
-        - pytest test -vv -k "not (definednamespace_creator or test_prepare_query)" --cov=rdflib --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=84
+        # test_definednamespace_creator uses a relatively-calculated path to a file in SRC_DIR/rdflib/tools
+        - pytest test -vv -k "not definednamespace_creator" --cov=rdflib --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=84
         # TODO: restore
         #   Found 4 errors in 3 files (checked 118 source files)
         # - mypy -p rdflib
