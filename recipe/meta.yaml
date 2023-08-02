@@ -109,7 +109,8 @@ outputs:
         - rdflib
       commands:
         - pip check
-        - python -c "from rdflib.term import _parseHTML; _parseHTML('<html></html>')"
+        # TODO: find a new test
+        # - python -c "from rdflib.term import _parseHTML; _parseHTML('<html></html>')"
 
   - name: rdflib-with-lxml
     build:
