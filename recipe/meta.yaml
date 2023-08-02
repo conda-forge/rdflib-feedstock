@@ -1,4 +1,4 @@
-{% set version = "6.3.2" %}
+{% set version = "7.0.0" %}
 
 package:
   name: rdflib-split
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
-  sha256: 72af591ff704f4caacea7ecc0c5a9056b8553e0489dd4f35a9bc52dbd41522e0
+  sha256: 9995eb8569428059b8c1affd26b25eac510d64f5043d9ce8c84e0d0036e995ae
 
 build:
   number: 0
