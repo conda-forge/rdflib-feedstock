@@ -37,6 +37,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdflib--with--html-green.svg)](https://anaconda.org/conda-forge/rdflib-with-html) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdflib-with-html.svg)](https://anaconda.org/conda-forge/rdflib-with-html) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdflib-with-html.svg)](https://anaconda.org/conda-forge/rdflib-with-html) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdflib-with-html.svg)](https://anaconda.org/conda-forge/rdflib-with-html) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdflib--with--lxml-green.svg)](https://anaconda.org/conda-forge/rdflib-with-lxml) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdflib-with-lxml.svg)](https://anaconda.org/conda-forge/rdflib-with-lxml) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdflib-with-lxml.svg)](https://anaconda.org/conda-forge/rdflib-with-lxml) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdflib-with-lxml.svg)](https://anaconda.org/conda-forge/rdflib-with-lxml) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdflib--with--networkx-green.svg)](https://anaconda.org/conda-forge/rdflib-with-networkx) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdflib-with-networkx.svg)](https://anaconda.org/conda-forge/rdflib-with-networkx) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdflib-with-networkx.svg)](https://anaconda.org/conda-forge/rdflib-with-networkx) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdflib-with-networkx.svg)](https://anaconda.org/conda-forge/rdflib-with-networkx) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-rdflib--with--orjson-green.svg)](https://anaconda.org/conda-forge/rdflib-with-orjson) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdflib-with-orjson.svg)](https://anaconda.org/conda-forge/rdflib-with-orjson) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdflib-with-orjson.svg)](https://anaconda.org/conda-forge/rdflib-with-orjson) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdflib-with-orjson.svg)](https://anaconda.org/conda-forge/rdflib-with-orjson) |
 
 Installing rdflib
 =================
@@ -48,16 +49,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `_rdflib-tests, rdflib, rdflib-with-all, rdflib-with-html, rdflib-with-lxml, rdflib-with-networkx` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `_rdflib-tests, rdflib, rdflib-with-all, rdflib-with-html, rdflib-with-lxml, rdflib-with-networkx, rdflib-with-orjson` can be installed with `conda`:
 
 ```
-conda install _rdflib-tests rdflib rdflib-with-all rdflib-with-html rdflib-with-lxml rdflib-with-networkx
+conda install _rdflib-tests rdflib rdflib-with-all rdflib-with-html rdflib-with-lxml rdflib-with-networkx rdflib-with-orjson
 ```
 
 or with `mamba`:
 
 ```
-mamba install _rdflib-tests rdflib rdflib-with-all rdflib-with-html rdflib-with-lxml rdflib-with-networkx
+mamba install _rdflib-tests rdflib rdflib-with-all rdflib-with-html rdflib-with-lxml rdflib-with-networkx rdflib-with-orjson
 ```
 
 It is possible to list all of the versions of `_rdflib-tests` available on your platform with `conda`:
@@ -104,7 +105,7 @@ available continuous integration services. Thanks to the awesome service provide
 [CircleCI](https://circleci.com/), [AppVeyor](https://www.appveyor.com/),
 [Drone](https://cloud.drone.io/welcome), and [TravisCI](https://travis-ci.com/)
 it is possible to build and upload installable packages to the
-[conda-forge](https://anaconda.org/conda-forge) [Anaconda-Cloud](https://anaconda.org/)
+[conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
 channel for Linux, Windows and OSX respectively.
 
 To manage the continuous integration and simplify feedstock maintenance
