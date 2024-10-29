@@ -56,7 +56,7 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage("rdflib", max_pin="x.x.x") }}
-        - networkx
+        - networkx >=2,<4
     test:
       requires:
         - pip
@@ -72,7 +72,7 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage("rdflib", max_pin="x.x.x") }}
-        - html5rdf
+        - html5rdf >=1.2,<2
     test:
       requires:
         - pip
