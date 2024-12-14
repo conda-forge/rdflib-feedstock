@@ -20,10 +20,14 @@ SKIP_OR = " or ".join(SKIPS)
 K = ["-k", f"not ({SKIP_OR})"]
 
 
+def do(*args: str) -> int:
+    print("\t".join(args), flush=True)
+    return call(args)
+
 if __name__ == "__main__":
     sys.exit(
         # run the tests
-        call([*COV, *RUN, *PYTEST, *K])
-        # maybe run coverage
-        or call([*COV, *REPORT])
+        do(*COV, *RUN, *PYTEST, *K)
+        # ... then maybe run coverage
+        or do(*COV, *REPORT)
     )

@@ -141,7 +141,7 @@ outputs:
         - {{ pin_subpackage("rdflib-with-all", max_pin="x.x.x") }}
     test:
       files:
-        - run_rdflib_tests.py
+        - run_rdflib_suite.py
       source_files:
         - examples/
         - pyproject.toml
@@ -155,7 +155,7 @@ outputs:
         - rdflib
       commands:
         - pip check
-        - python run_rdflib_tests.py
+        - python run_rdflib_suite.py
 
 about:
   home: https://github.com/RDFLib/rdflib
