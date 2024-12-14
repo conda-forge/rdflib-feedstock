@@ -5,8 +5,11 @@
 
 # the `if` avoids bot dupes
 {% if 1 %}
-  {% set test_skips = "not (definednamespace_creator or berkeleydb)" %}
   {% set cov_fail_under = 83 %}
+  # dep issues
+  {% set test_skips = "definednamespace_creator or berkeleydb" %}
+  # runtime pip install issues
+  {% set test_skips = test_skips + " or (test_plugins and (test_sparqleval or test_parser))" %}
 {% endif %}
 
 package:
