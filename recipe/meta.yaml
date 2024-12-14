@@ -6,10 +6,12 @@
 # the `if` avoids bot dupes
 {% if 1 %}
   {% set cov_fail_under = 83 %}
-  # dep issues
-  {% set test_skips = "definednamespace_creator or berkeleydb" %}
-  # runtime pip install issues
-  {% set test_skips = test_skips + " or (test_plugins and (test_sparqleval or test_parser))" %}
+  # https://github.com/conda-forge/rdflib-feedstock/pull/30   dep issues
+  {% set skips = "definednamespace_creator" %}
+  # https://github.com/conda-forge/rdflib-feedstock/pull/33   dep issues
+  {% set skips = skips + " or berkeleydb" %}
+  # https://github.com/conda-forge/rdflib-feedstock/pull/35   runtime pip install issues
+  {% set skips = skips + " or (test_plugins and (test_sparqleval or test_parser))" %}
 {% endif %}
 
 package:
@@ -162,7 +164,7 @@ outputs:
         - rdflib
       commands:
         - pip check
-        - coverage run --source=rdflib --branch -m pytest test -vv --color=yes --tb=long -k "{{ test_skips }}"
+        - coverage run --source=rdflib --branch -m pytest test -vv --color=yes --tb=long -k "not ({{ skips }})"
         - coverage report --show-missing --skip-covered --fail-under={{ cov_fail_under }}
 
 about:
