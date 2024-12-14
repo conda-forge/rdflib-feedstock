@@ -151,17 +151,16 @@ outputs:
         - pyproject.toml
         - test/
       requires:
+        - coverage
         - pip
-        - pytest-cov
-        # - mypy
+        - pytest
+        - setuptools
       imports:
         - rdflib
       commands:
         - pip check
         - coverage run --source=rdflib --branch -m pytest test -vv --color=yes --tb=long -k "{{ test_skips }}"
         - coverage report --show-missing --skip-covered --fail-under={{ cov_fail_under }}
-        # Found 4 errors in 2 files (checked 123 source files)
-        # - mypy -p rdflib
 
 about:
   home: https://github.com/RDFLib/rdflib
