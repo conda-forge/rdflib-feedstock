@@ -3,17 +3,6 @@
 # handle undefined PYTHON when re-rendering `noarch: generic` outputs
 {% set PYTHON = PYTHON | default("$PYTHON") %}
 
-# the `if` avoids bot dupes
-{% if 1 %}
-  {% set cov_fail_under = 83 %}
-  # https://github.com/conda-forge/rdflib-feedstock/pull/30   dep issues
-  {% set skips = "definednamespace_creator" %}
-  # https://github.com/conda-forge/rdflib-feedstock/pull/33   dep issues
-  {% set skips = skips + " or berkeleydb" %}
-  # https://github.com/conda-forge/rdflib-feedstock/pull/35   runtime pip install issues
-  {% set skips = skips + " or (test_plugins and (test_sparqleval or test_parser))" %}
-{% endif %}
-
 package:
   name: rdflib
   version: {{ version }}
@@ -151,6 +140,8 @@ outputs:
       run:
         - {{ pin_subpackage("rdflib-with-all", max_pin="x.x.x") }}
     test:
+      files:
+        - run_rdflib_tests.py
       source_files:
         - examples/
         - pyproject.toml
@@ -164,8 +155,7 @@ outputs:
         - rdflib
       commands:
         - pip check
-        - coverage run --source=rdflib --branch -m pytest test -vv --color=yes --tb=long -k "not ({{ skips }})"
-        - coverage report --show-missing --skip-covered --fail-under={{ cov_fail_under }}
+        - python run_rdflib_tests.py
 
 about:
   home: https://github.com/RDFLib/rdflib
