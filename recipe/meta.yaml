@@ -151,9 +151,9 @@ outputs:
         - pyproject.toml
         - test/
       requires:
-        - coverage
         - pip
-        - pytest
+        # uses `no_cover` fixture
+        - pytest-cov
         - setuptools
       imports:
         - rdflib
