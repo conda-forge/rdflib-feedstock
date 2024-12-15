@@ -3,22 +3,16 @@
 # handle undefined PYTHON when re-rendering `noarch: generic` outputs
 {% set PYTHON = PYTHON | default("$PYTHON") %}
 
-# the `if` avoids bot dupes
-{% if 1 %}
-  {% set test_skips = "not (definednamespace_creator or berkeleydb)" %}
-  {% set cov_fail_under = 83 %}
-{% endif %}
-
 package:
   name: rdflib
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
   sha256: 164de86bd3564558802ca983d84f6616a4a1a420c7a17a8152f5016076b2913e
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation --disable-pip-version-check
@@ -33,15 +27,16 @@ requirements:
   host:
     - pip
     - poetry-core >=1.4.0
-    - python >=3.8.1
+    - python {{ python_min }}
   run:
     - isodate >=0.7.0,<1.0.0
     - pyparsing >=2.1.0,<4
-    - python >=3.8.1
+    - python >={{ python_min }}
 
 test:
   requires:
     - pip
+    - python {{ python_min }}
   imports:
     - rdflib
   commands:
@@ -145,22 +140,22 @@ outputs:
       run:
         - {{ pin_subpackage("rdflib-with-all", max_pin="x.x.x") }}
     test:
+      files:
+        - run_rdflib_suite.py
       source_files:
         - examples/
         - pyproject.toml
         - test/
       requires:
         - pip
+        # uses `no_cover` fixture
         - pytest-cov
-        # - mypy
+        - setuptools
       imports:
         - rdflib
       commands:
         - pip check
-        - coverage run --source=rdflib --branch -m pytest test -vv --color=yes --tb=long -k "{{ test_skips }}"
-        - coverage report --show-missing --skip-covered --fail-under={{ cov_fail_under }}
-        # Found 4 errors in 2 files (checked 123 source files)
-        # - mypy -p rdflib
+        - python run_rdflib_suite.py
 
 about:
   home: https://github.com/RDFLib/rdflib
