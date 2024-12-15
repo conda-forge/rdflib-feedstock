@@ -27,7 +27,7 @@ def do(*args: str) -> int:
 if __name__ == "__main__":
     sys.exit(
         # run the tests
-        do(*COV, *RUN, *PYTEST, *K)
+        do(*COV, *RUN, *PYTEST, *K, "test")
         # ... then maybe run coverage
         or do(*COV, *REPORT)
     )
