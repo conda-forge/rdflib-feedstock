@@ -1,4 +1,4 @@
-{% set version = "7.1.1" %}
+{% set version = "7.1.2" %}
 
 # handle undefined PYTHON when re-rendering `noarch: generic` outputs
 {% set PYTHON = PYTHON | default("$PYTHON") %}
@@ -9,10 +9,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
-  sha256: 164de86bd3564558802ca983d84f6616a4a1a420c7a17a8152f5016076b2913e
+  sha256: 4fc8f6d50b199dc38fbc5256370f038c1cedca6102ccbde4e37c0fd2b7f36e65
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation --disable-pip-version-check
