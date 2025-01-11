@@ -22,7 +22,7 @@ K = ["-k", f"not ({SKIP_OR})"]
 
 def do(*args: str) -> int:
     print("\t".join(args), flush=True)
-    return call(args)
+    return call(args, cwd="src")
 
 if __name__ == "__main__":
     sys.exit(
