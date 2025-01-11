@@ -8,13 +8,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
-  sha256: 4fc8f6d50b199dc38fbc5256370f038c1cedca6102ccbde4e37c0fd2b7f36e65
+  - folder: dist
+    url: https://pypi.org/packages/source/r/rdflib/rdflib-{{ version }}.tar.gz
+    sha256: 4fc8f6d50b199dc38fbc5256370f038c1cedca6102ccbde4e37c0fd2b7f36e65
+  - folder: src
+    url: https://github.com/RDFLib/rdflib/archive/refs/tags/{{ version }}.tar.gz
+    sha256: a9af78d4d9807ae9a3f345f3380c4e4ade55f331874326073d5155a3c1c4315f
 
 build:
   number: 0
   noarch: python
   script:
+    - cd dist
     - {{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation --disable-pip-version-check
   entry_points:
     - csv2rdf = rdflib.tools.csv2rdf:main
@@ -26,11 +31,11 @@ build:
 requirements:
   host:
     - pip
-    - poetry-core >=1.4.0
+    - poetry-core >=2.0.0
     - python {{ python_min }}
   run:
     - isodate >=0.7.0,<1.0.0
-    - pyparsing >=2.1.0,<4
+    - pyparsing >=3.2.0,<4
     - python >={{ python_min }}
 
 test:
@@ -61,6 +66,7 @@ outputs:
     test:
       requires:
         - pip
+        - python {{ python_min }}
       imports:
         - rdflib
       commands:
@@ -73,10 +79,11 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage("rdflib", max_pin="x.x.x") }}
-        - html5rdf >=1.2,<2
+        - html5rdf >=1.2.1,<2
     test:
       requires:
         - pip
+        - python {{ python_min }}
       imports:
         - rdflib
       commands:
@@ -89,10 +96,11 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage("rdflib", max_pin="x.x.x") }}
-        - lxml >=4.3,<6.0
+        - lxml >=4.9.3,<6.0
     test:
       requires:
         - pip
+        - python {{ python_min }}
       imports:
         - rdflib
       commands:
@@ -105,10 +113,11 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage("rdflib", max_pin="x.x.x") }}
-        - orjson >=3.9.13,<4
+        - orjson >=3.9.14,<4
     test:
       requires:
         - pip
+        - python {{ python_min }}
       imports:
         - rdflib
       commands:
@@ -128,6 +137,7 @@ outputs:
     test:
       requires:
         - pip
+        - python {{ python_min }}
       imports:
         - rdflib
       commands:
@@ -143,11 +153,12 @@ outputs:
       files:
         - run_rdflib_suite.py
       source_files:
-        - examples/
-        - pyproject.toml
-        - test/
+        - src/examples/
+        - src/pyproject.toml
+        - src/test/
       requires:
         - pip
+        - python {{ python_min }}
         # uses `no_cover` fixture
         - pytest-cov
         - setuptools
@@ -160,7 +171,7 @@ outputs:
 about:
   home: https://github.com/RDFLib/rdflib
   license: BSD-3-Clause
-  license_file: LICENSE
+  license_file: dist/LICENSE
   summary: RDFLib is a Python library for working with RDF, a simple yet powerful language for representing information.
   dev_url: https://github.com/RDFLib/rdflib
   doc_url: https://rdflib.readthedocs.io
