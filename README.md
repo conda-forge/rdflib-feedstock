@@ -11,7 +11,7 @@ Summary: RDFLib is a Python library for working with RDF, a simple yet powerful 
 
 Development: https://github.com/RDFLib/rdflib
 
-Documentation: https://rdflib.readthedocs.io
+Documentation: https://rdflib.readthedocs.io/
 
 Current build status
 ====================
