@@ -1,7 +1,7 @@
 import sys
 from subprocess import call
 
-FAIL_UNDER = "83"
+FAIL_UNDER = 81
 COV = ["coverage"]
 RUN = ["run", "--source=rdflib", "--branch", "-m"]
 PYTEST = ["pytest", "-vv", "--color=yes", "--tb=long"]

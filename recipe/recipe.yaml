@@ -107,25 +107,6 @@ outputs:
           - python -c "from rdflib import term; assert term.html5rdf"
 
   - package:
-      name: rdflib-with-rdf4j
-    requirements:
-      run:
-        - ${{ pin_subpackage("rdflib", exact=True) }}
-        - httpx >=0.28.1,<1
-    tests:
-      - python:
-          imports: rdflib
-          pip_check: true
-          python_version:
-            - ${{ python_min }}.*
-            - ${{ python_test_max }}.*
-      - requirements:
-          run:
-            - python ${{ python_min }}.*
-        script:
-          - python -c "from rdflib.contrib.rdf4j import client; assert client.httpx"
-
-  - package:
       name: rdflib-with-lxml
     build:
       noarch: generic
@@ -166,6 +147,27 @@ outputs:
             - python ${{ python_min }}.*
         script:
           - python -c "from rdflib.plugins.sparql.results import jsonresults; assert jsonresults.orjson"
+
+  - package:
+      name: rdflib-with-rdf4j
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage("rdflib", exact=True) }}
+        - httpx >=0.28.1,<1
+    tests:
+      - python:
+          imports: rdflib
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_test_max }}.*
+      - requirements:
+          run:
+            - python ${{ python_min }}.*
+        script:
+          - python -c "from rdflib.contrib.rdf4j import client; assert client.httpx"
 
   - package:
       name: rdflib-with-all
