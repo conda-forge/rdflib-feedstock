@@ -1,27 +1,28 @@
 import sys
 from subprocess import call
 
-FAIL_UNDER = 81
+FAIL_UNDER = 48
 SKIP_MARKERS = [
     # https://github.com/conda-forge/rdflib-feedstock/pull/42
-    "webtest",                                                # flakes out most days
-    "testcontainer",                                          # needs docker
+    "webtest",  # flakes out most days
+    "testcontainer",  # needs docker
 ]
 SKIPS = [
     # https://github.com/conda-forge/rdflib-feedstock/pull/30
-    "definednamespace_creator",                               # dep issues
+    "definednamespace_creator",  # dep issues
     # https://github.com/conda-forge/rdflib-feedstock/pull/33
-    "berkeleydb",                                             # dep issues
+    "berkeleydb",  # dep issues
     # https://github.com/conda-forge/rdflib-feedstock/pull/35
-    "test_plugins and (test_sparqleval or test_parser)",      # runtime pip install issues
+    "test_plugins and (test_sparqleval or test_parser)",  # runtime pip install issues
     # https://github.com/conda-forge/rdflib-feedstock/pull/42
-    "test_rdf4j",                                             # uses weird fixtures
+    "test_rdf4j",  # uses weird fixtures
 ]
 
 COV = ["coverage"]
 RUN = ["run", "--source=rdflib", "--branch", "-m"]
 PYTEST = ["pytest", "-vv", "--color=yes", "--tb=long"]
 REPORT = ["report", "--show-missing", "--skip-covered", f"--fail-under={FAIL_UNDER}"]
+
 
 SKIP_OR = " or ".join(SKIPS)
 K = ["-k", f"not ({SKIP_OR})"]

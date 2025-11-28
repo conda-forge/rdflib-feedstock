@@ -43,8 +43,8 @@ outputs:
         - poetry-core >=2.0.0
         - python ${{ python_min }}.*
       run:
-        - isodate >=0.7.0,<1.0.0
-        - pyparsing >=3.2.0,<4
+        - isodate >=0.7.2,<1.0.0
+        - pyparsing >=2.1.0,<4
         - python >=${{ python_min }}
     tests:
       - python:
@@ -113,6 +113,7 @@ outputs:
     requirements:
       run:
         - ${{ pin_subpackage("rdflib", exact=True) }}
+        # see https://github.com/RDFLib/rdflib/pull/3219 (no changes)
         - lxml >=4.9.3,<7.0
     tests:
       - python:
@@ -204,19 +205,17 @@ outputs:
             - ${{ python_min }}.*
             - ${{ python_test_max }}.*
       - files:
-          recipe:
-            - run_rdflib_suite.py
           source:
             - src/examples/
             - src/pyproject.toml
             - src/test/
         requirements:
           run:
-            - python ${{ python_min }}.*
             - pytest-cov
+            - python ${{ python_min }}.*
             - setuptools
         script:
-          - python run_rdflib_suite.py
+          file: run_rdflib_suite.py
 
 about:
   license: BSD-3-Clause
