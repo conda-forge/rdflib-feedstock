@@ -113,7 +113,7 @@ outputs:
     requirements:
       run:
         - ${{ pin_subpackage("rdflib", exact=True) }}
-        - lxml >=4.9.3,<6.0
+        - lxml >=4.9.3,<7.0
     tests:
       - python:
           imports: rdflib

@@ -3,18 +3,19 @@ from subprocess import call
 
 FAIL_UNDER = 81
 SKIP_MARKERS = [
-    # https://github.com/conda-forge/rdflib-feedstock/pull/42   flakes out most days
-    "webtest",
+    # https://github.com/conda-forge/rdflib-feedstock/pull/42
+    "webtest",                                                # flakes out most days
+    "testcontainer",                                          # needs docker
 ]
 SKIPS = [
-    # https://github.com/conda-forge/rdflib-feedstock/pull/30   dep issues
-    "definednamespace_creator",
-    # https://github.com/conda-forge/rdflib-feedstock/pull/33   dep issues
-    "berkeleydb",
-    # https://github.com/conda-forge/rdflib-feedstock/pull/35   runtime pip install issues
-    "test_plugins and (test_sparqleval or test_parser)",
-    # https://github.com/conda-forge/rdflib-feedstock/pull/42   needs docker
-    "test_rdf4j",
+    # https://github.com/conda-forge/rdflib-feedstock/pull/30
+    "definednamespace_creator",                               # dep issues
+    # https://github.com/conda-forge/rdflib-feedstock/pull/33
+    "berkeleydb",                                             # dep issues
+    # https://github.com/conda-forge/rdflib-feedstock/pull/35
+    "test_plugins and (test_sparqleval or test_parser)",      # runtime pip install issues
+    # https://github.com/conda-forge/rdflib-feedstock/pull/42
+    "test_rdf4j",                                             # uses weird fixtures
 ]
 
 COV = ["coverage"]
