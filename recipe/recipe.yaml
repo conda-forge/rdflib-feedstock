@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "7.5.0"
+  version: "7.6.0"
   python_test_max: "3.14"
 
 recipe:
@@ -11,10 +11,10 @@ recipe:
 
 source:
   - url: https://pypi.org/packages/source/r/rdflib/rdflib-${{ version }}.tar.gz
-    sha256: 663083443908b1830e567350d72e74d9948b310f827966358d76eebdc92bf592
+    sha256: 6c831288d5e4a5a7ece85d0ccde9877d512a3d0f02d7c06455d00d6d0ea379df
     target_directory: dist
   - url: https://github.com/RDFLib/rdflib/archive/refs/tags/${{ version }}.tar.gz
-    sha256: 37432dc75f39cfd373e0eb2d80122711d7f64ea6919854dd25352c6ffebcdc11
+    sha256: 6b25bf33285300de5d93f8ab35a1692e70511caf95d264c4feb0266a21dbc7bd
     target_directory: src
 
 build:
