@@ -1,7 +1,11 @@
+import shutil
 import sys
-from subprocess import call
 
-FAIL_UNDER = 48
+from subprocess import call
+from pathlib import Path
+
+
+FAIL_UNDER = 45
 SKIP_MARKERS = [
     # https://github.com/conda-forge/rdflib-feedstock/pull/42
     "webtest",  # flakes out most days
@@ -16,6 +20,14 @@ SKIPS = [
     "test_plugins and (test_sparqleval or test_parser)",  # runtime pip install issues
     # https://github.com/conda-forge/rdflib-feedstock/pull/42
     "test_rdf4j",  # uses weird fixtures
+]
+
+SRC_DIR = Path(__file__).parent / "src"
+
+UNLINKS = [
+    # https://github.com/conda-forge/rdflib-feedstock/pull/43
+    ## needs docker, apparently
+    "test/test_graphdb/",
 ]
 
 COV = ["coverage"]
@@ -37,10 +49,28 @@ def do(*args: str) -> int:
     return call(args, cwd="src")
 
 
+def unlink() -> int:
+    rc = 0
+    for filename in sorted(UNLINKS):
+        path = SRC_DIR / filename
+        sys.stderr.write(f"... removing {path}\n")
+        if path.is_dir():
+            sys.stderr.write(f"""  ... and {len([*path.rglob("*")])} children\n""")
+            shutil.rmtree(path)
+        elif path.is_file():
+            path.unlink()
+        else:
+            sys.stderr.write(f"!!! not found: {path}\n")
+            rc += 1
+    return rc
+
+
 if __name__ == "__main__":
     sys.exit(
+        # clean up undiscoverable test files
+        unlink()
         # run the tests
-        do(*COV, *RUN, *PYTEST, *K, *M, "test")
+        or do(*COV, *RUN, *PYTEST, *K, *M, "test")
         # ... then maybe run coverage
         or do(*COV, *REPORT)
     )
